@@ -1,0 +1,29 @@
+{
+  "Format": "2.8.0",
+  "Changes": [
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Shed",
+      "FromFile": "assets/Shed_Window_Test.tmx",
+      "PatchMode": "Overlay",
+      "ToArea": {
+        "X": 4,
+        "Y": 1,
+        "Width": 13,
+        "Height": 2
+      }
+    },
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Shed2",
+      "FromFile": "assets/Shed_Window_Test.tmx",
+      "PatchMode": "Overlay",
+      "ToArea": {
+        "X": 3,
+        "Y": 1,
+        "Width": 13,
+        "Height": 2
+      }
+    }
+  ]
+}

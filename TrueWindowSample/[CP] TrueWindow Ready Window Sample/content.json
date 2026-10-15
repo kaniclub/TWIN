@@ -1,0 +1,47 @@
+{
+  "Format": "2.8.0",
+  "Changes": [
+    {
+      "Action": "Load",
+      "Target": "TrueWindowReadyWindowSample.Texture",
+      "FromFile": "assets/window_sample.png"
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Furniture",
+      "Entries": {
+        "kaniclub.TrueWindowReadyWindowSample": "TrueWindow Ready Vanilla Window/window/1 2/1 2/1/500/0/TrueWindow Ready Vanilla Window/0/TrueWindowReadyWindowSample.Texture/false/truewindow truewindow_id:kaniclub.TrueWindowReadyWindowSample.VanillaWindow"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Shops",
+      "TargetField": [
+        "Carpenter",
+        "Items"
+      ],
+      "Entries": {
+        "kaniclub.TrueWindowReadyWindowSample.VanillaWindow": {
+          "Id": "kaniclub.TrueWindowReadyWindowSample.VanillaWindow",
+          "ItemId": "(F)kaniclub.TrueWindowReadyWindowSample",
+          "Price": 500
+        }
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Shops",
+      "TargetField": [
+        "Furniture Catalogue",
+        "Items"
+      ],
+      "Entries": {
+        "kaniclub.TrueWindowReadyWindowSample.VanillaWindow": {
+          "Id": "kaniclub.TrueWindowReadyWindowSample.VanillaWindow",
+          "ItemId": "(F)kaniclub.TrueWindowReadyWindowSample",
+          "Price": 500
+        }
+      }
+    }
+  ]
+}

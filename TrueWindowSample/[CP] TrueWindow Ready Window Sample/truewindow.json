@@ -1,0 +1,18 @@
+{
+  "Format": "1.0.0",
+  "Targets": [
+    {
+      "TrueWindowId": "kaniclub.TrueWindowReadyWindowSample.VanillaWindow",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "image_sample.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "AllowRightClickConfig": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "Name": "TrueWindow Shed Map Test",
+  "Author": "OpenAI",
+  "Version": "1.0.0",
+  "Description": "Test/sample Content Patcher pack for TrueWindow MapTargets using Shed and Big Shed.",
+  "UniqueID": "openai.TrueWindow.ShedMapTest.CP",
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher",
+    "MinimumVersion": "2.8.0"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "kaniclub.TrueWindow",
+      "IsRequired": true
+    }
+  ]
+}

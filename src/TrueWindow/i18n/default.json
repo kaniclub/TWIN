@@ -1,0 +1,17 @@
+{
+  "menu.title": "TrueWindow Settings",
+  "menu.row.display_source": "Display source",
+  "menu.row.offset_x": "Horizontal offset",
+  "menu.row.offset_y": "Vertical offset",
+  "menu.row.zoom": "Zoom",
+  "menu.row.parallax": "Parallax",
+  "menu.value.location": "Location",
+  "menu.value.specified_image": "Specified image",
+  "config.render_throttle_frames.name": "Render throttle frames",
+  "config.render_throttle_frames.description": "Minimum frames to wait before re-rendering the exterior.",
+  "config.indoor_probe_interval_ticks.name": "Indoor probe interval",
+  "config.indoor_probe_interval_ticks.description": "Ticks to wait before rechecking an indoor location with no TrueWindow furniture.",
+  "menu.value.mountain": "Mountain",
+  "menu.value.ocean": "Ocean",
+  "menu.value.night_sky": "Night sky"
+}

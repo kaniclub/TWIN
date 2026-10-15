@@ -1,0 +1,18 @@
+{
+  "Name": "TrueWindow Ready Window Sample",
+  "Author": "kaniclub",
+  "Version": "1.0.0",
+  "Description": "Sample content pack for a TrueWindow-ready window.",
+  "UniqueID": "kaniclub.TrueWindowReadyWindowSample.CP",
+  "UpdateKeys": ["Nexus:44150"],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher",
+    "MinimumVersion": "2.8.0"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "kaniclub.TrueWindow",
+      "IsRequired": true
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "Format": "1.1.0",
+  "MapTargets": [
+    {
+      "TrueWindowId": "ShedWindowTest_1",
+      "MapPaths": [
+        "Maps/Shed"
+      ],
+      "Area": {
+        "X": 4,
+        "Y": 1,
+        "Width": 1,
+        "Height": 2
+      },
+      "SourceLayers": [
+        "Buildings"
+      ],
+      "OverlayDrawAfterLayer": "Buildings",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "stardewPanorama.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "Enabled": true
+    },
+    {
+      "TrueWindowId": "ShedWindowTest_2",
+      "MapPaths": [
+        "Maps/Shed"
+      ],
+      "Area": {
+        "X": 8,
+        "Y": 1,
+        "Width": 1,
+        "Height": 2
+      },
+      "SourceLayers": [
+        "Buildings"
+      ],
+      "OverlayDrawAfterLayer": "Buildings",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "stardewPanorama.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "Enabled": true
+    },
+    {
+      "TrueWindowId": "ShedWindowTest_3",
+      "MapPaths": [
+        "Maps/Shed"
+      ],
+      "Area": {
+        "X": 12,
+        "Y": 1,
+        "Width": 1,
+        "Height": 2
+      },
+      "SourceLayers": [
+        "Buildings"
+      ],
+      "OverlayDrawAfterLayer": "Buildings",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "stardewPanorama.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "Enabled": true
+    },
+    {
+      "TrueWindowId": "ShedWindowTest_4",
+      "MapPaths": [
+        "Maps/Shed"
+      ],
+      "Area": {
+        "X": 16,
+        "Y": 1,
+        "Width": 1,
+        "Height": 2
+      },
+      "SourceLayers": [
+        "Buildings"
+      ],
+      "OverlayDrawAfterLayer": "Buildings",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "stardewPanorama.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "Enabled": true
+    },
+    {
+      "TrueWindowId": "BigShedWindowTest_1",
+      "MapPaths": [
+        "Maps/Shed2"
+      ],
+      "Area": {
+        "X": 3,
+        "Y": 1,
+        "Width": 1,
+        "Height": 2
+      },
+      "SourceLayers": [
+        "Buildings"
+      ],
+      "OverlayDrawAfterLayer": "Buildings",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "stardewPanorama.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "Enabled": true
+    },
+    {
+      "TrueWindowId": "BigShedWindowTest_2",
+      "MapPaths": [
+        "Maps/Shed2"
+      ],
+      "Area": {
+        "X": 7,
+        "Y": 1,
+        "Width": 1,
+        "Height": 2
+      },
+      "SourceLayers": [
+        "Buildings"
+      ],
+      "OverlayDrawAfterLayer": "Buildings",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "stardewPanorama.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "Enabled": true
+    },
+    {
+      "TrueWindowId": "BigShedWindowTest_3",
+      "MapPaths": [
+        "Maps/Shed2"
+      ],
+      "Area": {
+        "X": 11,
+        "Y": 1,
+        "Width": 1,
+        "Height": 2
+      },
+      "SourceLayers": [
+        "Buildings"
+      ],
+      "OverlayDrawAfterLayer": "Buildings",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "stardewPanorama.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "Enabled": true
+    },
+    {
+      "TrueWindowId": "BigShedWindowTest_4",
+      "MapPaths": [
+        "Maps/Shed2"
+      ],
+      "Area": {
+        "X": 15,
+        "Y": 1,
+        "Width": 1,
+        "Height": 2
+      },
+      "SourceLayers": [
+        "Buildings"
+      ],
+      "OverlayDrawAfterLayer": "Buildings",
+      "ReservedColor": "#FF00FF",
+      "SpecifiedImage": "stardewPanorama.png",
+      "RenderLightGlows": false,
+      "ViewSettings": {
+        "OffsetX": 0,
+        "OffsetY": 0,
+        "Zoom": 1.0,
+        "ParallaxStrength": 0.2
+      },
+      "Enabled": true
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "Name": "TrueWindow",
+  "Author": "kaniclub",
+  "Version": "1.0.5",
+  "Description": "Framework mod that renders real-time exterior views inside TrueWindow-enabled furniture.",
+  "UniqueID": "kaniclub.TrueWindow",
+  "EntryDll": "TrueWindow.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": ["Nexus:44150"],
+  "Dependencies": [
+    {
+      "UniqueID": "Pathoschild.ContentPatcher",
+      "IsRequired": true
+    },
+    {
+      "UniqueID": "spacechase0.GenericModConfigMenu",
+      "IsRequired": false
+    }
+  ]
+}
