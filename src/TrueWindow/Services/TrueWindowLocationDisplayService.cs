@@ -24,11 +24,13 @@ internal sealed class TrueWindowLocationDisplayService
 
     private readonly IModHelper helper;
     private readonly TrueWindowInstanceRepository instanceRepository;
+    private readonly RegisteredImageCatalog registeredImages;
 
-    public TrueWindowLocationDisplayService(IModHelper helper, TrueWindowInstanceRepository instanceRepository)
+    public TrueWindowLocationDisplayService(IModHelper helper, TrueWindowInstanceRepository instanceRepository, RegisteredImageCatalog registeredImages)
     {
         this.helper = helper;
         this.instanceRepository = instanceRepository;
+        this.registeredImages = registeredImages;
     }
 
     // ロケーション共有設定を取得または生成する
@@ -124,6 +126,7 @@ internal sealed class TrueWindowLocationDisplayService
                 false));
         }
 
+        options.AddRange(this.registeredImages.Options);
         return options;
     }
 

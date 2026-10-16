@@ -24,6 +24,9 @@ public sealed class ModEntry : Mod
     private TrueWindowImageSourceService imageSourceService = null!;
     private TrueWindowExteriorRenderService exteriorRenderService = null!;
     private TrueWindowFurnitureService furnitureService = null!;
+    private readonly RegisteredImageCatalog registeredImages = new();
+
+    public override object GetApi() => new TrueWindowApi(this.registeredImages, this.imageSourceService.Clear);
 
     // ----------------------------
     // MOD の初期化を行う
@@ -44,7 +47,7 @@ public sealed class ModEntry : Mod
         this.maskCache = new TrueWindowMaskCache();
         this.parentBuildingLocator = new ParentBuildingLocator();
         this.viewTransformService = new TrueWindowViewTransformService(this.config);
-        this.locationDisplayService = new TrueWindowLocationDisplayService(helper, this.instanceRepository);
+        this.locationDisplayService = new TrueWindowLocationDisplayService(helper, this.instanceRepository, this.registeredImages);
         this.imageSourceService = new TrueWindowImageSourceService(helper);
         this.exteriorRenderService = new TrueWindowExteriorRenderService(this.config, this.parentBuildingLocator, this.viewTransformService);
         this.furnitureService = new TrueWindowFurnitureService(

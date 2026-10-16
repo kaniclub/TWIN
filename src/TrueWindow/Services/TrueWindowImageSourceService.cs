@@ -14,6 +14,7 @@ internal sealed class TrueWindowImageSourceService
 
     // 指定画像の読み込み結果をキャッシュする
     private readonly Dictionary<string, SpecifiedImageData> specifiedImageCache = new(StringComparer.OrdinalIgnoreCase);
+    private readonly HashSet<string> failedImageSources = new(StringComparer.OrdinalIgnoreCase);
 
     public TrueWindowImageSourceService(IModHelper helper)
     {
@@ -38,6 +39,7 @@ internal sealed class TrueWindowImageSourceService
         {
             return existing;
         }
+        if (this.failedImageSources.Contains(option.SourceId)) return null;
 
         try
         {
@@ -57,6 +59,7 @@ internal sealed class TrueWindowImageSourceService
 
                 if (loadedTexture is null)
                 {
+                    this.failedImageSources.Add(option.SourceId);
                     return null;
                 }
 
@@ -77,6 +80,8 @@ internal sealed class TrueWindowImageSourceService
         }
         catch
         {
+            // 読めない画像を毎フレーム再読込せず、外景表示へ戻す。
+            this.failedImageSources.Add(option.SourceId);
             return null;
         }
     }
@@ -85,6 +90,7 @@ internal sealed class TrueWindowImageSourceService
     public void Clear()
     {
         this.specifiedImageCache.Clear();
+        this.failedImageSources.Clear();
     }
 
     // ゲーム本体の画像アセットを読み込む

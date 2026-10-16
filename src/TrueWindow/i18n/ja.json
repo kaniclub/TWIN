@@ -1,5 +1,6 @@
 {
   "menu.title": "TrueWindow 設定",
+  "menu.drag_hint": "タイトル部分をドラッグして移動",
   "menu.row.display_source": "表示内容",
   "menu.row.offset_x": "横オフセット",
   "menu.row.offset_y": "縦オフセット",

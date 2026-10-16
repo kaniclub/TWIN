@@ -22,14 +22,6 @@ internal sealed class SpecifiedImageData
     public Microsoft.Xna.Framework.Color[] Pixels { get; }
 }
 
-// 選択可能な画像ソースをまとめる
-internal sealed record ImageSourceOption(
-    string SourceId,
-    string DisplayName,
-    string? FilePath,
-    string? GameAssetName,
-    bool IsBuiltIn);
-
 // ロケーション共有設定の既定値候補をまとめる
 internal sealed record TrueWindowDisplayDefaults(
     TrueWindowViewSettings ViewSettings,

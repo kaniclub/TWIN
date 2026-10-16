@@ -1,7 +1,7 @@
 {
   "Name": "TrueWindow",
   "Author": "kaniclub",
-  "Version": "1.0.5",
+  "Version": "1.0.6",
   "Description": "Framework mod that renders real-time exterior views inside TrueWindow-enabled furniture.",
   "UniqueID": "kaniclub.TrueWindow",
   "EntryDll": "TrueWindow.dll",
