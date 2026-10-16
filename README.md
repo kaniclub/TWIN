@@ -1,6 +1,6 @@
 # TrueWindow
 
-現在のバージョン：**1.0.5**。変更点は[更新履歴](CHANGELOG.md)を参照してください。
+現在のバージョン：**1.0.6**。変更点は[更新履歴](CHANGELOG.md)を参照してください。
 
 TrueWindow は、**窓を追加する MOD ではありません**。  
 TrueWindow は、**TrueWindow 対応の家具に「外の景色を映す機能」を追加するための機能追加 MOD** です。
@@ -15,6 +15,7 @@ TrueWindow は、**TrueWindow 対応の家具に「外の景色を映す機能�
 - 家具の表示設定で、ロケーションごとに見え方を調整
 - 表示元として、現在のロケーション表示・任意画像・組み込み画像を切り替え可能
 - 組み込み画像として、**夜空・山岳・海洋** の画像を選択可能
+- 対応MODが追加した画像を表示元として選択可能
 - Content Patcher の家具追加と組み合わせて、TrueWindow 対応家具を増やせる
 - 家具ごとに予約色・初期表示設定・家具の表示設定可否などを定義できる
 - 家具が持つ発光の描画有無を定義できる
@@ -62,6 +63,8 @@ TrueWindow には、**本体設定** と **家具の表示設定** がありま�
 
 TrueWindow 対応家具を右クリックすると、ロケーション単位の表示設定を変更できます。  
 この設定はセーブデータに保存されます。
+
+設定メニューはタイトル部分をドラッグすると移動できます。窓を見やすい場所へ動かして調整してください。メニューの位置はゲームを終了するまで保持されます。
 
 #### DisplaySource
 - 表示元を選択します。
@@ -328,6 +331,26 @@ TrueWindow は、対応する Content Pack から定義を読み込みます。
 ### AllowRightClickConfig
 - 家具の表示設定を開けるようにするかどうかです。
 - `false` にすると、その家具では家具の表示設定を開けません。
+
+## MODから画像を追加する
+
+TrueWindow 1.0.6以降では、APIを使って表示元の画像を登録できます。
+
+```csharp
+public interface ITrueWindowApi
+{
+    void RegisterImageSource(string modId, string imageId, string displayName, string filePath);
+}
+```
+
+`GameLaunched`イベントで`Helper.ModRegistry.GetApi<ITrueWindowApi>("kaniclub.TrueWindow")`を取得し、登録してください。
+
+- `modId`：登録するMODのUniqueID。
+- `imageId`：MOD内で一意かつ固定のID。インストール先に依存しない値を指定します。
+- `displayName`：設定画面に表示する名前。
+- `filePath`：PNG・JPG・JPEG画像の絶対パス。
+
+同じMOD・画像IDの再登録は置き換えになります。登録した画像はすべてのTrueWindow対応家具で選択できます。実際の画像データは選択時に読み込まれます。
 
 ## 仕様上の注意
 

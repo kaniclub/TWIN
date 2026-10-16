@@ -27,6 +27,11 @@ internal sealed class TrueWindowSettingsMenu : IClickableMenu
     private bool heldLeftSide;
     private long holdStartTick;
     private long lastRepeatTick;
+    private static Point? rememberedPosition;
+    private bool isDragging;
+    private Point dragOffset;
+
+    private Rectangle DragArea => new(this.xPositionOnScreen + 12, this.yPositionOnScreen + 8, this.width - 24, 48);
 
     // 設定メニューを初期化する
     public TrueWindowSettingsMenu(
@@ -87,6 +92,8 @@ internal sealed class TrueWindowSettingsMenu : IClickableMenu
 
         this.okButton = CreateFooterButton(this.xPositionOnScreen + this.width - 144, this.yPositionOnScreen + this.height - 72, new Rectangle(128, 256, 64, 64));
         this.cancelButton = CreateFooterButton(this.xPositionOnScreen + this.width - 80, this.yPositionOnScreen + this.height - 72, new Rectangle(192, 256, 64, 64));
+        Point initialPosition = rememberedPosition ?? new Point(this.xPositionOnScreen, this.yPositionOnScreen);
+        this.MoveTo(initialPosition.X, initialPosition.Y);
     }
 
     // クリック入力を処理する
@@ -94,6 +101,15 @@ internal sealed class TrueWindowSettingsMenu : IClickableMenu
     {
         base.receiveLeftClick(x, y, playSound);
 
+        if (this.DragArea.Contains(x, y))
+        {
+            this.ClearHold();
+            this.isDragging = true;
+            this.dragOffset = new Point(x - this.xPositionOnScreen, y - this.yPositionOnScreen);
+            return;
+        }
+
+        this.isDragging = false;
         foreach (RowButton row in this.rows)
         {
             if (row.LeftButton.containsPoint(x, y))
@@ -133,6 +149,12 @@ internal sealed class TrueWindowSettingsMenu : IClickableMenu
     {
         base.leftClickHeld(x, y);
 
+        if (this.isDragging)
+        {
+            this.MoveTo(x - this.dragOffset.X, y - this.dragOffset.Y);
+            return;
+        }
+
         if (this.heldRow is null)
         {
             return;
@@ -164,7 +186,37 @@ internal sealed class TrueWindowSettingsMenu : IClickableMenu
     public override void releaseLeftClick(int x, int y)
     {
         base.releaseLeftClick(x, y);
+        if (this.isDragging)
+        {
+            this.MoveTo(x - this.dragOffset.X, y - this.dragOffset.Y);
+            this.isDragging = false;
+        }
         this.ClearHold();
+    }
+
+    // 表示位置とクリック判定を同じ量だけ動かし、画面外への移動を防ぐ。
+    private void MoveTo(int x, int y)
+    {
+        x = Math.Clamp(x, 0, Math.Max(0, Game1.uiViewport.Width - this.width));
+        y = Math.Clamp(y, 0, Math.Max(0, Game1.uiViewport.Height - this.height));
+        int dx = x - this.xPositionOnScreen;
+        int dy = y - this.yPositionOnScreen;
+        this.xPositionOnScreen = x;
+        this.yPositionOnScreen = y;
+        foreach (RowButton row in this.rows)
+            row.ApplyLayout(row.LabelX + dx, row.LabelY + dy, row.ValueX + dx, row.ValueY + dy,
+                row.LeftButton.bounds.X + dx, row.LeftButton.bounds.Y + dy,
+                row.RightButton.bounds.X + dx, row.RightButton.bounds.Y + dy);
+        this.okButton.bounds.Offset(dx, dy);
+        this.cancelButton.bounds.Offset(dx, dy);
+        rememberedPosition = new Point(x, y);
+    }
+
+    public override void gameWindowSizeChanged(Rectangle oldBounds, Rectangle newBounds)
+    {
+        this.isDragging = false;
+        this.ClearHold();
+        this.MoveTo(this.xPositionOnScreen, this.yPositionOnScreen);
     }
 
     // キー入力を処理する
@@ -183,21 +235,29 @@ internal sealed class TrueWindowSettingsMenu : IClickableMenu
     // 画面を描画する
     public override void draw(SpriteBatch b)
     {
-        b.Draw(Game1.fadeToBlackRect, Game1.graphics.GraphicsDevice.Viewport.Bounds, Color.Black * 0.30f);
         IClickableMenu.drawTextureBox(b, this.xPositionOnScreen, this.yPositionOnScreen, this.width, this.height, Color.White * 0.88f);
 
         Utility.drawTextWithShadow(b, this.T("menu.title"), Game1.dialogueFont, new Vector2(this.xPositionOnScreen + 24, this.yPositionOnScreen + 12), Game1.textColor);
+        for (int i = 0; i < 3; i++)
+            b.Draw(Game1.staminaRect, new Rectangle(this.xPositionOnScreen + this.width - 48, this.yPositionOnScreen + 22 + i * 6, 20, 2), Game1.textColor * 0.6f);
 
+        string? hoverValue = null;
         foreach (RowButton row in this.rows)
         {
             Utility.drawTextWithShadow(b, row.Label, Game1.smallFont, new Vector2(row.LabelX, row.LabelY), Game1.textColor);
 
-            string valueText = row.GetValueText();
-            float valueWidth = Game1.smallFont.MeasureString(valueText).X;
             float valueRight = row.LeftButton.bounds.X - 18f;
+            float valueLeft = row.LabelX + Game1.smallFont.MeasureString(row.Label).X + 24f;
+            string originalText = row.GetValueText();
+            string valueText = row.FitValueText(originalText, Math.Max(20f, valueRight - valueLeft));
+            float valueWidth = Game1.smallFont.MeasureString(valueText).X;
             float valueX = valueRight - valueWidth;
 
             Utility.drawTextWithShadow(b, valueText, Game1.smallFont, new Vector2(valueX, row.ValueY), Game1.textColor);
+            if (valueText != originalText
+                && new Rectangle((int)valueX, row.ValueY, (int)valueWidth, Game1.smallFont.LineSpacing)
+                    .Contains(Game1.getMouseX(), Game1.getMouseY()))
+                hoverValue = originalText;
 
             row.LeftButton.draw(b, Color.White, 0.89f);
             row.RightButton.draw(b, Color.White, 0.89f);
@@ -205,6 +265,9 @@ internal sealed class TrueWindowSettingsMenu : IClickableMenu
 
         this.okButton.draw(b, Color.White, 0.89f);
         this.cancelButton.draw(b, Color.White, 0.89f);
+        if (hoverValue is not null) IClickableMenu.drawHoverText(b, hoverValue, Game1.smallFont);
+        else if (!this.isDragging && this.DragArea.Contains(Game1.getMouseX(), Game1.getMouseY()))
+            IClickableMenu.drawHoverText(b, this.T("menu.drag_hint"), Game1.smallFont);
         base.drawMouse(b);
     }
 
@@ -356,6 +419,31 @@ internal sealed class TrueWindowSettingsMenu : IClickableMenu
 
     private sealed class RowButton
     {
+        private string? lastValueText;
+        private string fittedValueText = "";
+        private float lastValueWidth;
+
+        public string FitValueText(string text, float maxWidth)
+        {
+            if (text == lastValueText && maxWidth == lastValueWidth) return fittedValueText;
+            lastValueText = text;
+            lastValueWidth = maxWidth;
+            fittedValueText = text;
+            if (Game1.smallFont.MeasureString(text).X > maxWidth)
+            {
+                int length = text.Length;
+                do
+                {
+                    length--;
+                    // UTF-16のサロゲートペアを途中で切らない。
+                    if (length > 0 && char.IsHighSurrogate(text[length - 1])) length--;
+                    fittedValueText = text[..length] + "...";
+                }
+                while (length > 0 && Game1.smallFont.MeasureString(fittedValueText).X > maxWidth);
+            }
+            return fittedValueText;
+        }
+
         public RowButton(string label, Func<string> getValueText, Action onLeft, Action onRight, bool repeatOnHold)
         {
             this.Label = label;

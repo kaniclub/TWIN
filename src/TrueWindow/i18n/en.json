@@ -1,5 +1,6 @@
 {
   "menu.title": "TrueWindow Settings",
+  "menu.drag_hint": "Drag the title bar to move",
   "menu.row.display_source": "Display source",
   "menu.row.offset_x": "Horizontal offset",
   "menu.row.offset_y": "Vertical offset",
